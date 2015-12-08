@@ -11,6 +11,7 @@ const autoprefixer  = require('autoprefixer');
 const partialImport = require('postcss-partial-import');
 const path          = require('path');
 const cssnano       = require('cssnano');
+const lost          = require('lost');
 const pngquant      = require('imagemin-pngquant');
 const eslint        = require('gulp-eslint');
 const header        = require('gulp-header');
@@ -18,9 +19,11 @@ const imagemin      = require('gulp-imagemin');
 const notify        = require('gulp-notify');
 const postcss       = require('gulp-postcss');
 const rename        = require('gulp-rename');
+const sourcemaps    = require('gulp-sourcemaps');
 const svgmin        = require('gulp-svgmin');
 const svgstore      = require('gulp-svgstore');
 const uglify        = require('gulp-uglify');
+
 
 /**
  * Constants
@@ -120,7 +123,8 @@ gulp.task('serve', [
  * PostCSS
  * -------
  * - Assign plugins to processors variable
- * - Compile css
+ * - Create sourcemaps
+ * - Process css with PostCSS
  * - Inject banner into finished file
  * - Add .min suffix
  * - Copy to destination
@@ -129,10 +133,12 @@ gulp.task('serve', [
 gulp.task('css', () => {
   const processors = [
     partialImport,
+    lost(),
     autoprefixer,
     cssnano
   ];
   return gulp.src(cssPath.src)
+    .pipe(sourcemaps.init())
     .pipe(postcss(processors))
     .pipe(header(banner, { pkg : pkg }))
     .pipe(rename({ suffix: '.min' }))
