@@ -3,7 +3,9 @@
   'use strict';
 
   $(function () {
-    // Gulp Boilerplate
+
+    undefined;
+
   });
 
 })(jQuery, window, document);
