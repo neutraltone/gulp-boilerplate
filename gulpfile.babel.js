@@ -140,6 +140,7 @@ gulp.task('css', () => {
   return gulp.src(cssPath.src)
     .pipe(sourcemaps.init())
     .pipe(postcss(processors))
+    .pipe(sourcemaps.write('.'))
     .pipe(header(banner, { pkg : pkg }))
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest(cssPath.dest))
