@@ -1,0 +1,38 @@
+/**
+ * base/_page.scss
+ */
+
+/* ==========================================================================
+   Base page settings
+   ========================================================================== */
+
+/**
+ * Set font defaults, base colours and high-level page stylings
+ */
+
+html {
+    font: var(--global-weight-normal) var(--global-font-size)/var(--global-lineheight) var(--body-font-family);
+    color: var(--body-font-color);
+    background-color: var(--body-background);
+}
+
+
+/**
+ * Set base branded user interactions
+ */
+
+::-moz-selection {
+    background-color: var(--selection-background);
+    color: var(--selection-color);
+    text-shadow: none;
+}
+
+::selection {
+    background-color: var(--selection-background);
+    color: var(--selection-color);
+    text-shadow: none;
+}
+
+:focus{
+    outline: var(--selection-background) auto 5px;
+}
