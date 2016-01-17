@@ -149,6 +149,7 @@ gulp.task('css', () => {
     .pipe(header(banner, { pkg : pkg }))
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest(cssPath.dest))
+    .pipe(browserSync.reload({stream:true, once: true}))
     .pipe(notify({
       message: 'CSS task complete',
       onLast: true
