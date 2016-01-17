@@ -7,6 +7,7 @@
 import gulp from 'gulp';
 import autoprefixer from 'autoprefixer';
 import browserSync from 'browser-sync';
+import calc from 'postcss-calc';
 import concat from 'gulp-concat';
 import cssnano from 'cssnano';
 import cssnext from 'postcss-cssnext';
@@ -138,8 +139,9 @@ gulp.task('css', () => {
     autoprefixer({
       browsers: ['last 2 versions']
     }),
-    cssnano,
     cssnext,
+    calc(),
+    cssnano,
     lost()
   ];
   return gulp.src(cssPath.src)
