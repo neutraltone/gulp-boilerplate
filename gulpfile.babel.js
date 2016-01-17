@@ -1,26 +1,32 @@
 /**
  * Gulp Packages
  * =============
- *
+ * Import our gulp packages.
  */
 
-const gulp          = require('gulp');
-const browserSync   = require('browser-sync').create();
-const concat        = require('gulp-concat');
-const autoprefixer  = require('autoprefixer');
-const partialImport = require('postcss-partial-import');
-const path          = require('path');
-const cssnano       = require('cssnano');
-const pngquant      = require('imagemin-pngquant');
-const eslint        = require('gulp-eslint');
-const header        = require('gulp-header');
-const imagemin      = require('gulp-imagemin');
-const notify        = require('gulp-notify');
-const postcss       = require('gulp-postcss');
-const rename        = require('gulp-rename');
-const svgmin        = require('gulp-svgmin');
-const svgstore      = require('gulp-svgstore');
-const uglify        = require('gulp-uglify');
+import gulp from 'gulp';
+import autoprefixer from 'autoprefixer';
+import browserSync from 'browser-sync';
+import calc from 'postcss-calc';
+import concat from 'gulp-concat';
+import cssnano from 'cssnano';
+import cssnext from 'postcss-cssnext';
+import eslint from 'gulp-eslint';
+import header from 'gulp-header';
+import imagemin from 'gulp-imagemin';
+import lost from 'lost';
+import notify from 'gulp-notify';
+import partialImport from 'postcss-partial-import';
+import path from 'path';
+import pngquant from 'imagemin-pngquant';
+import postcss from 'gulp-postcss';
+import rename from 'gulp-rename';
+import sourcemaps from 'gulp-sourcemaps';
+import svgmin from 'gulp-svgmin';
+import svgstore from 'gulp-svgstore';
+import uglify from 'gulp-uglify';
+
+
 
 /**
  * Constants
@@ -120,7 +126,8 @@ gulp.task('serve', [
  * PostCSS
  * -------
  * - Assign plugins to processors variable
- * - Compile css
+ * - Create sourcemaps
+ * - Process css with PostCSS
  * - Inject banner into finished file
  * - Add .min suffix
  * - Copy to destination
@@ -129,14 +136,22 @@ gulp.task('serve', [
 gulp.task('css', () => {
   const processors = [
     partialImport,
-    autoprefixer,
-    cssnano
+    autoprefixer({
+      browsers: ['last 2 versions']
+    }),
+    cssnext,
+    calc(),
+    cssnano,
+    lost()
   ];
   return gulp.src(cssPath.src)
+    .pipe(sourcemaps.init())
     .pipe(postcss(processors))
+    .pipe(sourcemaps.write('.'))
     .pipe(header(banner, { pkg : pkg }))
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest(cssPath.dest))
+    .pipe(browserSync.reload({stream:true, once: true}))
     .pipe(notify({
       message: 'CSS task complete',
       onLast: true
@@ -215,11 +230,13 @@ gulp.task('svg-sprite', () => {
       }]
     };
   }))
-    .pipe(svgstore())
-    .pipe(gulp.dest(iconPath.dest))
-    .pipe(browserSync.stream())
-    .pipe(notify({ message: 'SVG Sprite task complete', onLast: true }));
+  .pipe(svgstore())
+  .pipe(gulp.dest(iconPath.dest))
+  .pipe(browserSync.stream())
+  .pipe(notify({ message: 'SVG Sprite task complete', onLast: true }));
 });
+
+
 
 // Default Task
 gulp.task('default', ['serve']);

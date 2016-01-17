@@ -1,1 +1,18 @@
-extends: "eslint:recommended"
+{
+  "no-unused-vars": [
+    2,
+    {
+      "args": "after-used",
+      "argsIgnorePattern": "^(\\$|window|document|undefined)"
+    }
+  ],
+  "globals": {
+    "undefined": true
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true,
+    "jquery": true,
+  }
+}
