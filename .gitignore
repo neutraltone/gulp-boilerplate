@@ -9,6 +9,7 @@ critical.min.css
 style.unprefixed.css
 style.prefixed.css
 scripts.min.js
+*.min.map
 
 ## Node.js
 lib-cov
