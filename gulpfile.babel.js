@@ -134,13 +134,13 @@ gulp.task('serve', [
 
 gulp.task('css', () => {
   const processors = [
+    partialImport,
     autoprefixer({
       browsers: ['last 2 versions']
     }),
+    cssnano,
     cssnext,
-    partialImport,
-    lost(),
-    cssnano
+    lost()
   ];
   return gulp.src(cssPath.src)
     .pipe(sourcemaps.init())
