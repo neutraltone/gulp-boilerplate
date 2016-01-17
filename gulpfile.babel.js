@@ -1,23 +1,23 @@
 /**
  * Gulp Packages
  * =============
- *
+ * Import our gulp packages.
  */
 
 import gulp from 'gulp';
+import autoprefixer from 'autoprefixer';
 import browserSync from 'browser-sync';
 import concat from 'gulp-concat';
-import cssnext from 'postcss-cssnext';
-import autoprefixer from 'autoprefixer';
-import partialImport from 'postcss-partial-import';
-import path from 'path';
 import cssnano from 'cssnano';
-import lost from 'lost';
-import pngquant from 'imagemin-pngquant';
+import cssnext from 'postcss-cssnext';
 import eslint from 'gulp-eslint';
 import header from 'gulp-header';
 import imagemin from 'gulp-imagemin';
+import lost from 'lost';
 import notify from 'gulp-notify';
+import partialImport from 'postcss-partial-import';
+import path from 'path';
+import pngquant from 'imagemin-pngquant';
 import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
 import sourcemaps from 'gulp-sourcemaps';
