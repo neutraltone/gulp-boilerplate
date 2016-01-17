@@ -4,25 +4,27 @@
  *
  */
 
-const gulp          = require('gulp');
-const browserSync   = require('browser-sync').create();
-const concat        = require('gulp-concat');
-const autoprefixer  = require('autoprefixer');
-const partialImport = require('postcss-partial-import');
-const path          = require('path');
-const cssnano       = require('cssnano');
-const lost          = require('lost');
-const pngquant      = require('imagemin-pngquant');
-const eslint        = require('gulp-eslint');
-const header        = require('gulp-header');
-const imagemin      = require('gulp-imagemin');
-const notify        = require('gulp-notify');
-const postcss       = require('gulp-postcss');
-const rename        = require('gulp-rename');
-const sourcemaps    = require('gulp-sourcemaps');
-const svgmin        = require('gulp-svgmin');
-const svgstore      = require('gulp-svgstore');
-const uglify        = require('gulp-uglify');
+import gulp from 'gulp';
+import browserSync from 'browser-sync';
+import concat from 'gulp-concat';
+import cssnext from 'postcss-cssnext';
+import autoprefixer from 'autoprefixer';
+import partialImport from 'postcss-partial-import';
+import path from 'path';
+import cssnano from 'cssnano';
+import lost from 'lost';
+import pngquant from 'imagemin-pngquant';
+import eslint from 'gulp-eslint';
+import header from 'gulp-header';
+import imagemin from 'gulp-imagemin';
+import notify from 'gulp-notify';
+import postcss from 'gulp-postcss';
+import rename from 'gulp-rename';
+import sourcemaps from 'gulp-sourcemaps';
+import svgmin from 'gulp-svgmin';
+import svgstore from 'gulp-svgstore';
+import uglify from 'gulp-uglify';
+
 
 
 /**
@@ -132,9 +134,12 @@ gulp.task('serve', [
 
 gulp.task('css', () => {
   const processors = [
+    autoprefixer({
+      browsers: ['last 2 versions']
+    }),
+    cssnext,
     partialImport,
     lost(),
-    autoprefixer,
     cssnano
   ];
   return gulp.src(cssPath.src)
@@ -222,10 +227,10 @@ gulp.task('svg-sprite', () => {
       }]
     };
   }))
-    .pipe(svgstore())
-    .pipe(gulp.dest(iconPath.dest))
-    .pipe(browserSync.stream())
-    .pipe(notify({ message: 'SVG Sprite task complete', onLast: true }));
+  .pipe(svgstore())
+  .pipe(gulp.dest(iconPath.dest))
+  .pipe(browserSync.stream())
+  .pipe(notify({ message: 'SVG Sprite task complete', onLast: true }));
 });
 
 // Default Task
