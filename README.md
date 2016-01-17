@@ -1,6 +1,6 @@
 # gulp-boilerplate
 
-A gulp boilerplate for individuals and teams
+A gulp ITSCSS based boilerplate for individuals and teams.
 
 ## Thanks
 
