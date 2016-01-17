@@ -141,8 +141,8 @@ gulp.task('css', () => {
     }),
     cssnext,
     calc(),
-    cssnano,
-    lost()
+    lost(),
+    cssnano
   ];
   return gulp.src(cssPath.src)
     .pipe(sourcemaps.init())
