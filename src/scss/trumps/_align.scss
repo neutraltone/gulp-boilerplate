@@ -1,0 +1,38 @@
+/**
+ * base/_align.scss
+ */
+
+/* ==========================================================================
+   Align
+   ========================================================================== */
+
+/**
+ * Trumps text alignment
+ */
+
+.align--center {
+  text-align: center;
+}
+
+.align--right {
+  text-align: right;
+}
+
+
+/**
+ * Reset text alignment on mobiles
+ */
+
+@include media-query(palm) {
+  .align--left--palm {
+    text-align: left;
+  }
+
+  .align--center--palm {
+    text-align: center;
+  }
+
+  .align--right--palm {
+    text-align: right;
+  }
+}

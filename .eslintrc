@@ -1,4 +1,5 @@
 {
+  "extends": "eslint:recommended",
   "no-unused-vars": [
     2,
     {
@@ -13,6 +14,6 @@
     "es6": true,
     "node": true,
     "browser": true,
-    "jquery": true,
+    "jquery": true
   }
 }
