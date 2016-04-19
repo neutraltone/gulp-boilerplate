@@ -1,6 +1,21 @@
 # gulp-boilerplate
 
-A gulp ITSCSS based boilerplate for individuals and teams.
+A gulp ITSCSS Sass based boilerplate for individuals and teams.
+
+Lints and concatenates JS files.
+Compiles Sass files and automatically adds vendor prefixes.
+Exports both minified JS and CSS files with header info.
+Generates SVG sprites.
+
+[Download Gulp Boilerplate](https://github.com/neutraltone/gulp-boilerplate/archive/master.zip)
+
+## In This Documentation
+
+[Getting Started](#getting-started)
+[File Structure](#file-structure)
+[Working with the Source Files](#working-with-the-source-files)
+[Options & Settings](#options--settings)
+[License](#license)
 
 ## Getting Started
 
@@ -143,8 +158,8 @@ const spritePath = {
 ## Thanks
 
 * [gpmd](https://github.com/gpmd/itcss-boilerplate) - For their ITCSS boilerplate.
+* [Chris Ferdinandi](https://github.com/cferdinandi) - For his Gulp Boilerplate which parts of this were inspired by.  
 
-## TODO
+## License
 
-- Build website [ O ]
-- Integrate with slack [ O ]
+The code is available under the [MIT License](https://github.com/neutraltone/gulp-boilerplate/blob/master/LICENSE.md).  
