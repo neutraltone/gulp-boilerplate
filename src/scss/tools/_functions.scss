@@ -1,0 +1,35 @@
+/**
+ * tools/_functions.scss
+ */
+
+/* ==========================================================================
+   Functions
+   ========================================================================== */
+
+/**
+ * Maths functions
+ */
+
+@function quarter($number) {
+  @return $number / 4;
+}
+
+@function third($number) {
+  @return $number / 3;
+}
+
+@function halve($number) {
+  @return $number / 2;
+}
+
+@function double($number) {
+  @return $number * 2;
+}
+
+@function treble($number) {
+  @return $number * 3;
+}
+
+@function quadruple($number) {
+  @return $number * 4;
+}

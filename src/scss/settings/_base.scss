@@ -1,0 +1,30 @@
+/**
+ * settings/_base.scss
+ */
+
+/* ==========================================================================
+   Base variable settings
+   ========================================================================== */
+
+/**
+ * High level base settings
+ */
+
+$base-font-size:              18px;
+$base-line-height:            24px;
+$base-spacing-unit:           24px;
+$base-container-width:	      860px;
+$base-container-width-lrg:    1280px;
+$base-container-gutter:       $base-spacing-unit;
+$base-font:                   'Helvetica Neue', Helvetica, Arial, sans-serif;
+$base-anim-duration:          300ms;
+$base-anim-easing:            cubic-bezier(0.16, 0.68, 0.43, 0.99);
+$base-anim-easing-alt:        cubic-bezier(.175, .885, .32, 1.275);
+
+
+/**
+ * Typography
+ */
+
+$font-primary:   'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-secondary: 'Helvetica Neue', Helvetica, Arial, sans-serif;

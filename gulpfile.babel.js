@@ -5,26 +5,21 @@
  */
 
 import gulp from 'gulp';
-import autoprefixer from 'autoprefixer';
 import browserSync from 'browser-sync';
-import calc from 'postcss-calc';
+import cheerio from 'gulp-cheerio';
 import concat from 'gulp-concat';
-import cssnano from 'cssnano';
-import cssnext from 'postcss-cssnext';
+import babel from 'gulp-babel';
 import eslint from 'gulp-eslint';
 import header from 'gulp-header';
 import imagemin from 'gulp-imagemin';
-import lost from 'lost';
-import notify from 'gulp-notify';
-import partialImport from 'postcss-partial-import';
 import path from 'path';
 import pngquant from 'imagemin-pngquant';
-import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
-import sourcemaps from 'gulp-sourcemaps';
 import svgmin from 'gulp-svgmin';
 import svgstore from 'gulp-svgstore';
 import uglify from 'gulp-uglify';
+import sass from 'gulp-sass';
+import sourcemaps from 'gulp-sourcemaps';
 
 
 
@@ -50,16 +45,13 @@ const project = {
   dist: 'dist'
 };
 
-const cssPath = {
-  src: `${project.src}/css/*.css`,
+const scssPath = {
+  src: `${project.src}/scss/**/*.scss`,
   dest: `${project.dist}/assets/css/`
 };
 
 const jsPath = {
-  src: [
-    `${project.src}/js/plugins/*.js`,
-    `${project.src}/js/*.js`
-  ],
+  src: `${project.src}/js/**/*.js`,
   dest: `${project.dist}/assets/js`
 };
 
@@ -68,8 +60,8 @@ const imagePath = {
   dest: `${project.dist}/assets/img`
 };
 
-const iconPath = {
-  src: `${project.src}/icons/{,*/}*.svg`,
+const spritePath = {
+  src: `${project.src}/sprite/{,*/}*.svg`,
   dest: `${project.dist}/assets/img`
 }
 
@@ -105,7 +97,7 @@ const banner = [
  */
 
 gulp.task('serve', [
-    'css',
+    'sass',
     'js',
     'images',
     'svg-sprite'
@@ -113,17 +105,17 @@ gulp.task('serve', [
     browserSync.init({
       server: './dist'
     });
-    gulp.watch(`${project.src}/css/{,*/}*.css`, ['css']);
+    gulp.watch(scssPath.src, ['sass']);
     gulp.watch(jsPath.src, ['js']);
     gulp.watch(imagePath.src, ['images']);
-    gulp.watch(iconPath.src, ['svg-sprite']);
+    gulp.watch(spritePath.src, ['svg-sprite']);
     gulp.watch(`${project.dist}/*.html`).on('change', browserSync.reload);
 });
 
 
 
 /**
- * PostCSS
+ * Sass
  * -------
  * - Assign plugins to processors variable
  * - Create sourcemaps
@@ -133,29 +125,18 @@ gulp.task('serve', [
  * - Copy to destination
  */
 
-gulp.task('css', () => {
-  const processors = [
-    partialImport,
-    autoprefixer({
-      browsers: ['last 2 versions']
-    }),
-    cssnext,
-    calc(),
-    lost(),
-    cssnano
-  ];
-  return gulp.src(cssPath.src)
+gulp.task('sass', () => {
+  return gulp.src(scssPath.src)
     .pipe(sourcemaps.init())
-    .pipe(postcss(processors))
-    .pipe(sourcemaps.write('.'))
+    .pipe(sass({
+      outputStyle: 'compressed',
+      errLogToConsole: true
+    }))
+    .pipe(sourcemaps.write())
     .pipe(header(banner, { pkg : pkg }))
     .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest(cssPath.dest))
+    .pipe(gulp.dest(scssPath.dest))
     .pipe(browserSync.reload({stream:true, once: true}))
-    .pipe(notify({
-      message: 'CSS task complete',
-      onLast: true
-    }));
 });
 
 
@@ -176,13 +157,15 @@ gulp.task('js', () => {
   return gulp.src(jsPath.src)
     .pipe(eslint())
     .pipe(eslint.format())
-    .pipe(concat('scripts.js'))
-    .pipe(uglify())
+//		.pipe(babel({
+//			presets: ['es2015']
+//		}))
+//    .pipe(concat('scripts.js'))
+//    .pipe(uglify())
     .pipe(header(banner, { pkg : pkg }))
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest(jsPath.dest))
     .pipe(browserSync.reload({stream:true, once: true}))
-    .pipe(notify({ message: 'JS task complete' }));
 });
 
 
@@ -204,7 +187,6 @@ gulp.task('images', () => {
     }))
     .pipe(gulp.dest(imagePath.dest))
     .pipe(browserSync.stream())
-    .pipe(notify({ message: 'Images task complete', onLast: true }));
 });
 
 
@@ -219,21 +201,12 @@ gulp.task('images', () => {
  */
 
 gulp.task('svg-sprite', () => {
-  return gulp.src(iconPath.src).pipe(svgmin(file => {
-    const prefix = path.basename(file.relative, path.extname(file.relative));
-    return {
-      plugins: [{
-        cleanupIDs: {
-          prefix: `${ prefix }-`,
-          minify: true
-        }
-      }]
-    };
-  }))
-  .pipe(svgstore())
-  .pipe(gulp.dest(iconPath.dest))
-  .pipe(browserSync.stream())
-  .pipe(notify({ message: 'SVG Sprite task complete', onLast: true }));
+  return gulp.src(spritePath.src)
+    .pipe(svgmin())
+    .pipe(svgstore())
+    .pipe(cheerio($ => $('svg').attr('style',  'display:none')))
+    .pipe(gulp.dest(spritePath.dest))
+    .pipe(browserSync.stream())
 });
 
 
@@ -242,4 +215,4 @@ gulp.task('svg-sprite', () => {
 gulp.task('default', ['serve']);
 
 // Build Task
-gulp.task('build', ['css', 'js', 'images', 'svg-sprite']);
+gulp.task('build', ['sass', 'js', 'images', 'svg-sprite']);

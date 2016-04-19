@@ -1,0 +1,23 @@
+/**
+ * trumps/_accessibility.scss
+ */
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+/**
+ * Styles for screen-reader only elements
+ */
+
+.visuallyhidden,
+%visuallyhidden {
+  position: absolute;
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
+}

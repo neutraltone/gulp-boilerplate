@@ -1,0 +1,22 @@
+/**
+ * settings/_responsive.scss
+ */
+
+/* ==========================================================================
+   Responsive breakpoint settings
+   ========================================================================== */
+
+/**
+ * Hold our breakpoint aliases and conditions in a list.
+ *
+ * These can be invoked later on via the `media-query()` mixin found in
+ * `tools/_responsive.scss`.
+ */
+
+$breakpoints: (
+  'palm'       '(max-width: 480px)',
+  'lap'        '(min-width: 481px) and (max-width: 1023px)',
+  'portable'   '(max-width: 1023px)',
+  'desk'       '(min-width: 1024px)',
+  'desk-large' '(min-width: 1430px)'
+);

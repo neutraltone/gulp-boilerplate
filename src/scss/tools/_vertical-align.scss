@@ -1,0 +1,17 @@
+/**
+ * tools/_vertical-align.scss
+ */
+
+/* ==========================================================================
+   Vertical Align
+   ========================================================================== */
+
+/**
+ * Vertically align any element in relation to it's parent container
+ */
+
+@mixin vertical-align {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}

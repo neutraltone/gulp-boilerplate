@@ -1,0 +1,33 @@
+/**
+ * tools/_colors.scss
+ */
+
+/* ==========================================================================
+   Colors
+   ========================================================================== */
+
+/**
+ * Color mixin - retreives the colors from the color $colors map in
+ * `settings/_colors.scss`. ie. `color(primary, base)`
+ */
+
+@function color($color-name, $color-variant:null) {
+  @if ($color-variant != null) {
+    @return map-get(map-get($colors, $color-name), $color-variant);
+  } @else {
+    @return map-get($colors, $color-name);
+  }
+}
+
+
+/**
+ * Colour functions
+ */
+
+@function tint($colour, $percentage) {
+  @return mix($colour, color(bw, white), $percentage);
+}
+
+@function shade($colour, $percentage) {
+  @return mix($colour, color(bw, black), $percentage);
+}

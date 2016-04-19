@@ -1,0 +1,37 @@
+/**
+ * trumps/_responsive.scss
+ */
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+/**
+ * Show/Hide block level elements based on a media query. Useful for modules
+ * that need to be duplicated in the markup
+ */
+
+.desk--show,
+.palm--show {
+  display: none;
+}
+
+@include media-query(palm) {
+  .palm--show {
+    display: block;
+  }
+
+  .palm--hide {
+    display: none;
+  }
+}
+
+@include media-query(desk) {
+  .desk--show {
+    display: block;
+  }
+
+  .desk--hide {
+    display: none;
+  }
+}
