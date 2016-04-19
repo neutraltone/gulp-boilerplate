@@ -9,13 +9,13 @@ Generates SVG sprites.
 
 [Download Gulp Boilerplate](https://github.com/neutraltone/gulp-boilerplate/archive/master.zip)
 
-## In This Documentation
+## Contents
 
-[Getting Started](#getting-started)
-[File Structure](#file-structure)
-[Working with the Source Files](#working-with-the-source-files)
-[Options & Settings](#options--settings)
-[License](#license)
+* [Getting Started](#getting-started)
+* [File Structure](#file-structure)
+* [Working with the Source Files](#working-with-the-source-files)
+* [Options & Settings](#options--settings)
+* [License](#license)
 
 ## Getting Started
 
