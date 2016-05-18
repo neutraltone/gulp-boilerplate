@@ -4,7 +4,7 @@
 
   $(function () {
     // Gulp Boilerplate
-    //var desk;
+
   });
 
 })(jQuery, window, document);

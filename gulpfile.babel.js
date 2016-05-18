@@ -18,6 +18,7 @@ import rename from 'gulp-rename';
 import svgmin from 'gulp-svgmin';
 import svgstore from 'gulp-svgstore';
 import uglify from 'gulp-uglify';
+import autoprefixer from 'gulp-autoprefixer';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
 
@@ -132,6 +133,10 @@ gulp.task('sass', () => {
       outputStyle: 'compressed',
       errLogToConsole: true
     }))
+    .pipe(autoprefixer({
+			browsers: ['last 2 versions'],
+			cascade: false
+		}))
     .pipe(sourcemaps.write())
     .pipe(header(banner, { pkg : pkg }))
     .pipe(rename({ suffix: '.min' }))
@@ -157,11 +162,11 @@ gulp.task('js', () => {
   return gulp.src(jsPath.src)
     .pipe(eslint())
     .pipe(eslint.format())
-//		.pipe(babel({
-//			presets: ['es2015']
-//		}))
-//    .pipe(concat('scripts.js'))
-//    .pipe(uglify())
+    .pipe(babel({
+        presets: ['es2015']
+    }))
+    .pipe(concat('scripts.js'))
+    .pipe(uglify())
     .pipe(header(banner, { pkg : pkg }))
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest(jsPath.dest))
