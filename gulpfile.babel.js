@@ -135,7 +135,8 @@ gulp.task('lint-sass', () => {
         formatter: 'string',
         console: true
       }],
-      failAfterError: false
+      failAfterError: false,
+      syntax: "scss"
     }));
 });
 
