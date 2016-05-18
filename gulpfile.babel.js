@@ -19,6 +19,7 @@ import svgmin from 'gulp-svgmin';
 import svgstore from 'gulp-svgstore';
 import uglify from 'gulp-uglify';
 import sass from 'gulp-sass';
+import autoprefixer from 'gulp-autoprefixer';
 import sourcemaps from 'gulp-sourcemaps';
 
 
@@ -132,6 +133,10 @@ gulp.task('sass', () => {
       outputStyle: 'compressed',
       errLogToConsole: true
     }))
+    .pipe(autoprefixer({
+			browsers: ['last 2 versions'],
+			cascade: false
+		}))
     .pipe(sourcemaps.write())
     .pipe(header(banner, { pkg : pkg }))
     .pipe(rename({ suffix: '.min' }))
