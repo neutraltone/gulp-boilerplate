@@ -30,41 +30,8 @@ import sourcemaps from 'gulp-sourcemaps';
  * Constants used throughout this boilerplate.
  */
 
-const pkg = require('./package.json');
-
-
-
-/**
- * Directory Templates
- * -------------------
- * Here we setup the various project directories
- * making it easy to amend at a later date.
- */
-
-const project = {
-  src: 'src',
-  dist: 'dist'
-};
-
-const scssPath = {
-  src: `${project.src}/scss/**/*.scss`,
-  dest: `${project.dist}/assets/css/`
-};
-
-const jsPath = {
-  src: `${project.src}/js/**/*.js`,
-  dest: `${project.dist}/assets/js`
-};
-
-const imagePath = {
-  src: `${project.src}/img/{,*/}*.{jpg,jpeg,png,gif,svg}`,
-  dest: `${project.dist}/assets/img`
-};
-
-const spritePath = {
-  src: `${project.src}/sprite/{,*/}*.svg`,
-  dest: `${project.dist}/assets/img`
-}
+import pkg from './package.json';
+import options from './gulp-options.json';
 
 
 
@@ -99,18 +66,19 @@ const banner = [
 
 gulp.task('serve', [
     'sass',
+    'lint-js',
     'js',
     'images',
     'svg-sprite'
   ], () => {
     browserSync.init({
-      server: './dist'
+      server: options.dest.dist
     });
-    gulp.watch(scssPath.src, ['sass']);
-    gulp.watch(jsPath.src, ['js']);
-    gulp.watch(imagePath.src, ['images']);
-    gulp.watch(spritePath.src, ['svg-sprite']);
-    gulp.watch(`${project.dist}/*.html`).on('change', browserSync.reload);
+    gulp.watch(options.src.scss, ['sass']);
+    gulp.watch(options.src.js, ['lint-js', 'js']);
+    gulp.watch(options.src.img, ['images']);
+    gulp.watch(options.src.sprite, ['svg-sprite']);
+    gulp.watch(`${options.dest.dist}/*.html`).on('change', browserSync.reload);
 });
 
 
@@ -127,7 +95,7 @@ gulp.task('serve', [
  */
 
 gulp.task('sass', () => {
-  return gulp.src(scssPath.src)
+  return gulp.src(options.src.scss)
     .pipe(sourcemaps.init())
     .pipe(sass({
       outputStyle: 'compressed',
@@ -138,10 +106,15 @@ gulp.task('sass', () => {
 			cascade: false
 		}))
     .pipe(sourcemaps.write())
-    .pipe(header(banner, { pkg : pkg }))
+    .pipe(header(banner, {
+      pkg: pkg
+    }))
     .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest(scssPath.dest))
-    .pipe(browserSync.reload({stream:true, once: true}))
+    .pipe(gulp.dest(options.dest.css))
+    .pipe(browserSync.reload({
+      stream:true,
+      once: true
+    }))
 });
 
 
@@ -159,18 +132,36 @@ gulp.task('sass', () => {
  */
 
 gulp.task('js', () => {
-  return gulp.src(jsPath.src)
-    .pipe(eslint())
-    .pipe(eslint.format())
+  return gulp.src(options.src.vendor, options.src.js)
     .pipe(babel({
         presets: ['es2015']
     }))
     .pipe(concat('scripts.js'))
     .pipe(uglify())
-    .pipe(header(banner, { pkg : pkg }))
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest(jsPath.dest))
-    .pipe(browserSync.reload({stream:true, once: true}))
+    .pipe(header(banner, {
+      pkg: pkg
+    }))
+    .pipe(rename({
+      suffix: '.min'
+    }))
+    .pipe(gulp.dest(options.dest.js))
+    .pipe(browserSync.reload({
+      stream:true,
+      once: true
+    }))
+});
+
+
+/**
+ * Lint JavaScript
+ * ----------
+ * - Lint source files with eslint
+ */
+
+gulp.task('lint-js', () => {
+  return gulp.src(options.src.js)
+    .pipe(eslint())
+    .pipe(eslint.format())
 });
 
 
@@ -184,13 +175,15 @@ gulp.task('js', () => {
  */
 
 gulp.task('images', () => {
-  return gulp.src(imagePath.src)
+  return gulp.src(options.src.img)
     .pipe(imagemin({
         progressive: true,
-        svgoPlugins: [{ removeViewBox: false }],
+        svgoPlugins: [{
+          removeViewBox: false
+        }],
         use: [pngquant()]
     }))
-    .pipe(gulp.dest(imagePath.dest))
+    .pipe(gulp.dest(options.dest.img))
     .pipe(browserSync.stream())
 });
 
@@ -206,11 +199,11 @@ gulp.task('images', () => {
  */
 
 gulp.task('svg-sprite', () => {
-  return gulp.src(spritePath.src)
+  return gulp.src(options.src.sprite)
     .pipe(svgmin())
     .pipe(svgstore())
     .pipe(cheerio($ => $('svg').attr('style',  'display:none')))
-    .pipe(gulp.dest(spritePath.dest))
+    .pipe(gulp.dest(options.dest.img))
     .pipe(browserSync.stream())
 });
 
@@ -220,4 +213,4 @@ gulp.task('svg-sprite', () => {
 gulp.task('default', ['serve']);
 
 // Build Task
-gulp.task('build', ['sass', 'js', 'images', 'svg-sprite']);
+gulp.task('build', ['sass', 'lint-js', 'js', 'images', 'svg-sprite']);
