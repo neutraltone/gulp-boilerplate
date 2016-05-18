@@ -18,6 +18,7 @@ import rename from 'gulp-rename';
 import svgmin from 'gulp-svgmin';
 import svgstore from 'gulp-svgstore';
 import uglify from 'gulp-uglify';
+import gulpStylelint from 'gulp-stylelint';
 import autoprefixer from 'gulp-autoprefixer';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
@@ -65,6 +66,7 @@ const banner = [
  */
 
 gulp.task('serve', [
+    'lint-sass',
     'sass',
     'lint-js',
     'js',
@@ -74,7 +76,7 @@ gulp.task('serve', [
     browserSync.init({
       server: options.dest.dist
     });
-    gulp.watch(options.src.scss, ['sass']);
+    gulp.watch(options.src.scss, ['lint-sass', 'sass']);
     gulp.watch(options.src.js, ['lint-js', 'js']);
     gulp.watch(options.src.img, ['images']);
     gulp.watch(options.src.sprite, ['svg-sprite']);
@@ -112,7 +114,7 @@ gulp.task('sass', () => {
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest(options.dest.css))
     .pipe(browserSync.reload({
-      stream:true,
+      stream: true,
       once: true
     }))
 });
@@ -120,9 +122,28 @@ gulp.task('sass', () => {
 
 
 /**
+ * Lint Sass
+ * -------
+ * - Lints src files with stylelint
+ */
+
+gulp.task('lint-sass', () => {
+  return gulp
+    .src(options.src.scss)
+    .pipe(gulpStylelint({
+      reporters: [{
+        formatter: 'string',
+        console: true
+      }],
+      failAfterError: false
+    }));
+});
+
+
+
+/**
  * JavaScript
  * ----------
- * - Lint source files with eslint
  * - Concatinate plugins and scripts files
  * - Uglify concatinated code
  * - Inject banner into finished file
@@ -213,4 +234,4 @@ gulp.task('svg-sprite', () => {
 gulp.task('default', ['serve']);
 
 // Build Task
-gulp.task('build', ['sass', 'lint-js', 'js', 'images', 'svg-sprite']);
+gulp.task('build', ['lint-sass', 'sass', 'lint-js', 'js', 'images', 'svg-sprite']);
