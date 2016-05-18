@@ -132,7 +132,7 @@ gulp.task('sass', () => {
  */
 
 gulp.task('js', () => {
-  return gulp.src(options.src.vendor, options.src.js)
+  return gulp.src([options.src.vendor, options.src.js])
     .pipe(babel({
         presets: ['es2015']
     }))
@@ -146,7 +146,7 @@ gulp.task('js', () => {
     }))
     .pipe(gulp.dest(options.dest.js))
     .pipe(browserSync.reload({
-      stream:true,
+      stream: true,
       once: true
     }))
 });
