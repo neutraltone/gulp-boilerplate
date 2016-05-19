@@ -78,6 +78,7 @@ gulp-boilerplate/
 ├── .editorconfig
 ├── .eslintrc
 ├── .gitignore
+├── .stylelintrc
 ├── gulp-options.json
 ├── gulpfile.babel.js
 ├── LICENSE
