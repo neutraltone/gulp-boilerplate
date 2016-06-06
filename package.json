@@ -41,6 +41,6 @@
     "gulp-uglify": "^1.5.1",
     "imagemin-pngquant": "^4.2.0",
     "stylelint": "^6.5.1",
-    "stylelint-config-standard": "^8.0.0",
+    "stylelint-config-standard": "^8.0.0"
   }
 }
