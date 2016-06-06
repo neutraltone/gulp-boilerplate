@@ -44,44 +44,46 @@ Add your files to the appropriate `src` subdirectories. Gulp will process and an
 
 ```
 gulp-boilerplate/
-|—— dist/
-|   |—— assets/
-|   |   |—— css/
-|   |   |   |—— critical.min.css
-|   |   |   |—— main.min.css
-|   |   |—— fonts/
-|   |   |   |—— # font files
-|   |   |—— img/
-|   |   |   |—— # image files
-|   |   |—— js/
-|   |   |   |—— scripts.min.js
-|   |—— favicon.icon
-|   |—— humans.txt
-|   |—— index.html
-|   |—— manifest.json
-|   |—— robots.txt
-|   |—— service-worker.js
-|   |—— # static assets
-|—— src/
-|   |—— img/
-|   |   |—— # image files
-|   |   |—— touch/
-|   |   |   |—— apple-touch-icon.png
-|   |   |   |—— chrome-touch-icon-192x192.png
-|   |   |   |—— icon.png
-|   |   |   |—— ms-touch-icon-144x144-precomposed.png
-|   |—— js/
-|   |   |—— # script files
-|   |—— scss/
-|   |—— sprite/
-|—— .babelrc
-|—— .editorconfig
-|—— .eslintrc
-|—— .gitignore
-|—— gulpfile.babel.js
-|—— LICENSE
-|—— package.json
-|—— readme.md
+├── dist/
+│   ├── assets/
+│   │   ├── css/
+│   │   │   ├── critical.min.css
+│   │   │   └── main.min.css
+│   │   ├── fonts/
+│   │   │   └── # font files
+│   │   ├── img/
+│   │   │   └── # image files
+│   │   ├── js/
+│   │   │   └── scripts.min.js
+│   ├── favicon.icon
+│   ├── humans.txt
+│   ├── index.html
+│   ├── manifest.json
+│   ├── robots.txt
+│   ├── service-worker.js
+│   ├── # static assets
+├── src/
+│   ├── img/
+│   │   ├── # image files
+│   │   ├── touch/
+│   │   │   ├── apple-touch-icon.png
+│   │   │   ├── chrome-touch-icon-192x192.png
+│   │   │   ├── icon.png
+│   │   │   └── ms-touch-icon-144x144-precomposed.png
+│   ├── js/
+│   │   └── # script files
+│   ├── scss/
+│   └── sprite/
+├── .babelrc
+├── .editorconfig
+├── .eslintrc
+├── .gitignore
+├── .stylelintrc
+├── gulp-options.json
+├── gulpfile.babel.js
+├── LICENSE
+├── package.json
+└── readme.md
 ```
 
 ## Working with the Source Files
@@ -123,35 +125,24 @@ Open up `package.json` to change the name, version, URL and other data about the
 
 ### Changing the Directory Structure
 
-Inside `gulpfile.babel.js` you'll see group of constants in the `Directory Templates` section. Adjust the paths to suit your workflow.
+Inside `gulp-options.json` you'll find a json object of directory paths. Adjust the paths to suit your workflow.
 
 ```
-const project = {
-  src: 'src',
-  dist: 'dist'
-};
-
-const scssPath = {
-  src: `${project.src}/scss/**/*.scss`,
-  dest: `${project.dist}/assets/css/`
-};
-
-const jsPath = {
-  src: [
-    `${project.src}/js/plugins/*.js`,
-    `${project.src}/js/*.js`
-  ],
-  dest: `${project.dist}/assets/js`
-};
-
-const imagePath = {
-  src: `${project.src}/img/{,*/}*.{jpg,jpeg,png,gif,svg}`,
-  dest: `${project.dist}/assets/img`
-};
-
-const spritePath = {
-  src: `${project.src}/sprite/{,*/}*.svg`,
-  dest: `${project.dist}/assets/img`
+{
+  "src": {
+    "src": "src",
+    "scss": "src/scss/**/*.scss",
+    "img": "src/img/{,*/}*.{jpg,jpeg,png,gif,svg}",
+    "sprite": "src/sprite/{,*/}*.svg",
+    "js": "src/js/**/*.js",
+    "vendor": "src/js/vendor/**/*.js"
+  },
+  "dest" : {
+    "dist": "dist",
+    "css": "dist/assets/css",
+    "img": "dist/assets/img",
+    "js": "dist/assets/js"
+  }
 }
 ```
 

@@ -1,0 +1,16 @@
+{
+  "src": {
+    "src": "src",
+    "scss": "src/scss/**/*.scss",
+    "img": "src/img/{,*/}*.{jpg,jpeg,png,gif,svg}",
+    "sprite": "src/sprite/{,*/}*.svg",
+    "js": "src/js/**/*.js",
+    "vendor": "src/js/vendor/**/*.js"
+  },
+  "dest" : {
+    "dist": "dist",
+    "css": "dist/assets/css",
+    "img": "dist/assets/img",
+    "js": "dist/assets/js"
+  }
+}
