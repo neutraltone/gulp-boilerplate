@@ -14,7 +14,9 @@
 @function color($color-name, $color-variant:null) {
   @if ($color-variant != null) {
     @return map-get(map-get($colors, $color-name), $color-variant);
-  } @else {
+  }
+
+  @else {
     @return map-get($colors, $color-name);
   }
 }

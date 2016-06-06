@@ -10,9 +10,9 @@
  * Clearfixes - @extend %clearfix to prevent class="clearfix" appearing all the time
  */
 
-.clearfix,
-%clearfix {
-  &:after {
+%clearfix,
+.clearfix {
+  &::after {
     content: "";
     display: table;
     clear: both;

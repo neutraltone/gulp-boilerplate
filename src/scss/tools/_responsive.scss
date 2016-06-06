@@ -20,7 +20,7 @@
 
     // Grab the alias and the condition from their respective locations in
     // the list.
-    $alias:     nth($breakpoint, 1);
+    $alias: nth($breakpoint, 1);
     $condition: nth($breakpoint, 2);
 
     // If the media query we’ve specified has an alias and a condition...
@@ -38,6 +38,6 @@
 
   // If the user specifies a non-exitent alias, send them a warning.
   @if $breakpoint-found == false {
-    @warn "Oops! Breakpoint ‘#{$mq}’ does not exist."
+    @warn "Oops! Breakpoint ‘#{$mq}’ does not exist.";
   }
 }
