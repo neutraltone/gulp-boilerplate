@@ -1,0 +1,15 @@
+{
+  "lang": "en",
+  "name": "Gulp Boilerplate by @neutraltone",
+  "icons": [
+    {
+      "src": "/assets/img/touch/icon.png",
+      "sizes": "300x300",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
+}

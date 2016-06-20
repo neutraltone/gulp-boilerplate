@@ -9,49 +9,81 @@
     <!-- Meta data -->
     <title>Gulp Boilerplate by @neutraltone</title>
     <meta name="description" content="">
-    <!-- //Meta data -->
 
 
     <!-- Opengraph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="">
-    <meta property="og:image" content="/assets/img/meta__facebook-og.jpg">
-    <meta property="og:image:secure_url" content="/assets/img/meta__facebook-og.jpg">
+    <meta property="og:image" content="/assets/img/social/meta__facebook-og.jpg">
+    <meta property="og:image:secure_url" content="/assets/img/social/meta__facebook-og.jpg">
     <meta property="og:url" content="">
     <meta property="og:description" content="">
-    <!-- //Opengraph -->
 
 
     <!-- Twitter cards -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="">
-    <meta name="twitter:image" content="/assets/img/meta__twitter-card.jpg">
+    <meta name="twitter:image" content="/assets/img/social/meta__twitter-card.jpg">
     <meta name="twitter:url" content="">
     <meta name="twitter:description" content="">
-    <!-- //Twitter cards -->
 
 
-    <!-- Sub resources -->
-    <link href="/assets/img/logo.png" rel="subresource">
-    <link href="/assets/img/logo.svg" rel="subresource">
-    <!-- //Sub resources -->
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Gulp Boilerplate by @neutraltone">
+    <link rel="icon" sizes="192x192" href="/assets/img/touch/chrome-touch-icon-192x192.png">
+
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Gulp Boilerplate by @neutraltone">
+    <link rel="apple-touch-icon" href="/assets/img/touch/apple-touch-icon.png">
+
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="/assets/img/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+
+
+    <!-- Color the status bar on mobile devices -->
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="/manifest.json">
 
 
     <!-- DNS Prefetch -->
     <link href="//www.google-analytics.com" rel="dns-prefetch">
     <link href="//ajax.googleapis.com" rel="dns-prefetch">
-    <!-- //DNS Prefetch -->
 
 
     <!-- Stylesheets -->
+    <link href="//fonts.googleapis.com/css?family=Work+Sans:300,400,700,600|Roboto+Slab:100.300,400,700" rel="stylesheet">
     <link href="/assets/css/critical.min.css" rel="stylesheet">
     <link href="/assets/css/main.min.css" rel="stylesheet">
-    <!-- //Stylesheets -->
 
 
     <!-- Scripts -->
     <script src="/assets/js/vendor/modernizr-2.6.2.min.js"></script>
-    <!-- //Scripts -->
+    <script>
+      // Ajax SVG sprite.
+      window.addEventListener('load', function (event) {
+        var ajax = new XMLHttpRequest();
+        ajax.open('GET', 'assets/img/sprite.svg', true);
+        ajax.send();
+        ajax.onload = function (e) {
+          var div = document.createElement('div');
+          div.innerHTML = ajax.responseText;
+          document.body.insertBefore(div, document.body.childNodes[0]);
+        }
+      });
+    </script>
 
   </head>
 
@@ -59,7 +91,6 @@
 
     <!-- Header: .header -->
     <header class="header" role="banner">
-
       <div class="logo">
         <a href="/">
           <img src="assets/img/logo.svg" width="120" height="120" alt="Logo">
@@ -73,14 +104,12 @@
           </li>
         </ul>
       </nav>
-
     </header>
     <!-- //Header: .header -->
 
 
     <!-- Primary Content: .main -->
     <main class="main" role="main">
-
       <h1>HTML Ipsum Presents</h1>
 
       <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
@@ -108,7 +137,6 @@
       	height: 80px;
       }
       </code></pre>
-
     </main>
     <!-- //Primary Content: .main -->
 
