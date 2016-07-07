@@ -42,5 +42,15 @@
     "imagemin-pngquant": "^4.2.0",
     "stylelint": "^6.5.1",
     "stylelint-config-standard": "^8.0.0"
+  },
+  "scripts": {
+    "start": "gulp",
+    "lint:sass": "gulp lint-sass",
+    "lint:js": "gulp lint-js",
+    "build": "gulp build",
+    "build:sass": "gulp sass",
+    "build:js": "gulp js",
+    "build:images": "gulp images",
+    "build:svg-sprite": "gulp svg-sprite"
   }
 }
