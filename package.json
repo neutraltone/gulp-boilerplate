@@ -19,6 +19,16 @@
     "url": "https://github.com/neutraltone/gulp-boilerplate/issues"
   },
   "homepage": "https://github.com/neutraltone/gulp-boilerplate#readme",
+  "scripts": {
+    "start": "gulp",
+    "lint:sass": "gulp lint-sass",
+    "lint:js": "gulp lint-js",
+    "build": "gulp build",
+    "build:sass": "gulp sass",
+    "build:js": "gulp js",
+    "build:images": "gulp images",
+    "build:svg-sprite": "gulp svg-sprite"
+  },
   "devDependencies": {
     "babel-core": "^6.2.1",
     "babel-preset-es2015": "^6.1.18",
