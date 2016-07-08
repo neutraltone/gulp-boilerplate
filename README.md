@@ -31,8 +31,14 @@ Make sure these are installed first.
 1. In bash/terminal/command line, `cd` into your project directory.
 2. Run `npm install` to install required files.
 3. When it's done installing, run one of the task runners to get going:
-  * `gulp` automatically watch for changes and compile files, lints JavaScript and server and synchronise changes to the browser via [Browsersync](https://www.browsersync.io/) accordingly; 
-  * `gulp build` will manually compile files and lint JavaScript without serving the files to the browser.
+  * `npm start` automatically watch for changes and compile files, lints JavaScript and server and synchronise changes to the browser via [Browsersync](https://www.browsersync.io/) accordingly;
+  * `npm run lint:sass` lints your sass using [stylelint](https://github.com/stylelint/stylelint). Rules can be found in the [`.stylelint`](https://github.com/neutraltone/gulp-boilerplate/blob/master/.stylelintrc) config file.
+  * `npm run lint:js` lints your JavaScript using [eslint](https://github.com/eslint/eslint). Rules can be found in the [`.eslintrc`](https://github.com/neutraltone/gulp-boilerplate/blob/master/.eslintrc) config file.   
+  * `npm run build` manually compile files and lint JavaScript without serving the files to the browser.
+  * `npm run build:sass` manually compiles just your sass.
+  * `npm run build:js` manually compiles just your JavaScript.
+  * `npm run build:images` manually optimizes just your images.
+  * `npm run build:svg-sprite` manually compiles all your SVG's in a SVG sprite.
   
 ## File Structure
 
