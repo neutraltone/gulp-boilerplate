@@ -7,7 +7,13 @@
    ========================================================================== */
 
 /**
- * Vertically align any element in relation to it's parent container
+ * Vertically align any element in relation to it's parent container.
+ *
+ * Usage:
+ *
+ * .foo {
+ *   @include vertical-align();
+ * }
  */
 
 @mixin vertical-align {
