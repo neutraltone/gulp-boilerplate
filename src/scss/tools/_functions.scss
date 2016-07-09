@@ -8,6 +8,14 @@
 
 /**
  * Maths functions
+ *
+ * @param {Number} $number - input number for calculation
+ *
+ * Usage:
+ *
+ * .foo {
+ *   width: halve(10px);
+ * }
  */
 
 @function quarter($number) {
