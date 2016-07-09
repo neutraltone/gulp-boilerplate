@@ -10,10 +10,10 @@
  * A simple mixin for generating CSS triangles using border.
  *
  * @param {Direction} $direction - Triangle direction, either `top`, `right`,
- *   `bottom` or `left`
- * @param {Color} $color [currentcolor] - Triangle color
- * @param {Width} $width [1em] - Triangle width
- * @param {Height} $height [1em] - Triangle height
+ *   `bottom` or `left`.
+ * @param {Color} $color [currentcolor] - Triangle color.
+ * @param {Width} $width [1em] - Triangle width.
+ * @param {Height} $height [1em] - Triangle height.
  *
  * Usage:
  *
