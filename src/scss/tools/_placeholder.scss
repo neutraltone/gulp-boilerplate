@@ -1,0 +1,49 @@
+/**
+ * tools/_placeholder.scss
+ */
+
+/* ==========================================================================
+   Placeholder
+   ========================================================================== */
+
+/**
+ * A mixin for easily styling placeholders on inputs.
+ *
+ * @param {Styles} $styles - Placeholder styles.
+ *
+ * Usage:
+ *
+ * .foo {
+ *   @include placeholder {
+ *     color: green;
+ *   }
+ * }
+ *
+ * @include placeholder {
+ *   color: red;
+ * }
+ */
+
+@mixin optional-at-root($styles) {
+  @at-root #{if(not &, $styles, selector-append(&, $styles))} {
+    @content;
+  }
+}
+
+@mixin placeholder {
+  @include optional-at-root('::-webkit-input-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root('::-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-ms-input-placeholder') {
+    @content;
+  }
+}

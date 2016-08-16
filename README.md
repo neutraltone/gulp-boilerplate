@@ -1,6 +1,6 @@
 # gulp-boilerplate
 
-A gulp ITSCSS Sass based boilerplate for individuals and teams.
+A gulp ITCSS Sass based boilerplate for individuals and teams.
 
 Lints and concatenates JS files.
 Compiles Sass files and automatically adds vendor prefixes.
