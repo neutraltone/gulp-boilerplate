@@ -107,11 +107,11 @@ gulp.task('sass', () => {
 			browsers: ['last 2 versions'],
 			cascade: false
 		}))
-    .pipe(sourcemaps.write())
+    .pipe(rename({ suffix: '.min' }))
     .pipe(header(banner, {
       pkg: pkg
     }))
-    .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(options.dest.css))
     .pipe(browserSync.reload({
       stream: true,

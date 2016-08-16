@@ -6,6 +6,8 @@
 style.min.css
 main.min.css
 critical.min.css
+main.min.css.map
+critical.min.css.map
 style.unprefixed.css
 style.prefixed.css
 scripts.min.js
