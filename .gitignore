@@ -3,15 +3,8 @@
 # @author Tony Phipps
 
 ## Gulp Boilerplate
-style.min.css
-main.min.css
-critical.min.css
-main.min.css.map
-critical.min.css.map
-style.unprefixed.css
-style.prefixed.css
+/dist/assets/css/**/*
 scripts.min.js
-*.min.map
 
 ## Node.js
 lib-cov
