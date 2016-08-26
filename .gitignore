@@ -3,8 +3,12 @@
 # @author Tony Phipps
 
 ## Gulp Boilerplate
-/dist/assets/css/**/*
+critical.min.css
+critical.min.css.map
+main.min.css
+main.min.css.map
 scripts.min.js
+scripts.min.js.map
 
 ## Node.js
 lib-cov

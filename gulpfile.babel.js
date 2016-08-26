@@ -155,8 +155,9 @@ gulp.task('lint-sass', () => {
 
 gulp.task('js', () => {
   return gulp.src([options.src.vendor, options.src.js])
+    .pipe(sourcemaps.init())
     .pipe(babel({
-        presets: ['es2015']
+      presets: ['es2015']
     }))
     .pipe(concat('scripts.js'))
     .pipe(uglify())
@@ -166,6 +167,7 @@ gulp.task('js', () => {
     .pipe(rename({
       suffix: '.min'
     }))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(options.dest.js))
     .pipe(browserSync.reload({
       stream: true,
