@@ -59,8 +59,9 @@ gulp-boilerplate/
 │   │   │   └── # font files
 │   │   ├── img/
 │   │   │   └── # image files
-│   │   ├── js/
-│   │   │   └── scripts.min.js
+│   │   └── js/
+│   │       └── scripts.min.js
+│   ├── .htaccess
 │   ├── favicon.icon
 │   ├── humans.txt
 │   ├── index.html
