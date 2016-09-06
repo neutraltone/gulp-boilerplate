@@ -1,0 +1,46 @@
+/**
+ * tools/_image-overlay.scss
+ */
+
+/* ==========================================================================
+   Image overlay
+   ========================================================================== */
+
+/**
+ * A mixin for adding linear gradient overlays to background images.
+ *
+ * Originally by @syntag - http://codepen.io/SYNTAG/pen/yayWZE
+ *
+ * @param {Img} $img - Background image for element.
+ * @param {Color} $color - Start colour of the linear gradient.
+ * @param {Color2} $color2 [$color] - End colour of the linear gradient.
+ * @param {Opacity} $opacity [0.3] - the opacity of the gradient.
+ * @param {Hover} $hover [none] - if set to `hover` enables a hover effect.
+ * @param {Hover opacity} $hover-opacity [0.1] - the opacity of the gradient when hovered.
+ *
+ * Usage:
+ *
+ * .background-image {
+ *   @include img-overlay('//placehold.it/300x300', #ff0099, #ff9900, 0.8, hover, 0.5);
+ * }
+ */
+
+@mixin img-overlay($img, $color, $color2: $color, $opacity: 0.3, $hover: none, $hover-opacity: 0.1) {
+  background-image:
+    linear-gradient(
+      transparentize($color, $opacity),
+      transparentize($color2, $opacity)
+    ),
+    url($img);
+
+  @if $hover == hover {
+    &:hover {
+      background-image:
+        linear-gradient(
+          transparentize($color, $opacity - $hover-opacity),
+          transparentize($color2, $opacity - $hover-opacity)
+        ),
+        url($img);
+    }
+  }
+}
