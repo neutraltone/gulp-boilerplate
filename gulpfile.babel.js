@@ -12,6 +12,7 @@ import babel from 'gulp-babel';
 import eslint from 'gulp-eslint';
 import header from 'gulp-header';
 import imagemin from 'gulp-imagemin';
+import modernizr from 'gulp-modernizr';
 import path from 'path';
 import pngquant from 'imagemin-pngquant';
 import rename from 'gulp-rename';
@@ -24,7 +25,6 @@ import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
 
 
-
 /**
  * Constants
  * ---------
@@ -33,7 +33,6 @@ import sourcemaps from 'gulp-sourcemaps';
 
 import pkg from './package.json';
 import options from './gulp-options.json';
-
 
 
 /**
@@ -56,7 +55,6 @@ const banner = [
 ].join('');
 
 
-
 /**
  * BrowserSync.io
  * --------------
@@ -70,6 +68,7 @@ gulp.task('serve', [
     'sass',
     'lint-js',
     'js',
+    'modernizr',
     'images',
     'svg-sprite'
   ], () => {
@@ -77,12 +76,11 @@ gulp.task('serve', [
       server: options.dest.dist
     });
     gulp.watch(options.src.scss, ['lint-sass', 'sass']);
-    gulp.watch(options.src.js, ['lint-js', 'js']);
+    gulp.watch(options.src.js, ['lint-js', 'js', 'modernizr']);
     gulp.watch(options.src.img, ['images']);
     gulp.watch(options.src.sprite, ['svg-sprite']);
     gulp.watch(`${options.dest.dist}/*.html`).on('change', browserSync.reload);
 });
-
 
 
 /**
@@ -120,7 +118,6 @@ gulp.task('sass', () => {
 });
 
 
-
 /**
  * Lint Sass
  * -------
@@ -141,8 +138,7 @@ gulp.task('lint-sass', () => {
 });
 
 
-
-/**
+/*
  * JavaScript
  * ----------
  * - Concatinate plugins and scripts files
@@ -177,6 +173,27 @@ gulp.task('js', () => {
 
 
 /**
+ * Modernizr
+ * ---------
+ * - Scan src JavaScript files for Modernizr checks
+ * - Build production Modernizr
+ * - Copy to destination
+ * - Reload browsersync
+ */
+
+gulp.task('modernizr', () => {
+  return gulp
+    .src(options.src.js)
+    .pipe(modernizr('modernizr-build.min.js'))
+    .pipe(gulp.dest(options.dest.vendor))
+    .pipe(browserSync.reload({
+      stream: true,
+      once: true
+    }))
+});
+
+
+/**
  * Lint JavaScript
  * ----------
  * - Lint source files with eslint
@@ -187,7 +204,6 @@ gulp.task('lint-js', () => {
     .pipe(eslint())
     .pipe(eslint.format())
 });
-
 
 
 /**
@@ -212,7 +228,6 @@ gulp.task('images', () => {
 });
 
 
-
 /**
  * SVG Sprite
  * ----------
@@ -232,9 +247,8 @@ gulp.task('svg-sprite', () => {
 });
 
 
-
 // Default Task
 gulp.task('default', ['serve']);
 
 // Build Task
-gulp.task('build', ['lint-sass', 'sass', 'lint-js', 'js', 'images', 'svg-sprite']);
+gulp.task('build', ['lint-sass', 'sass', 'lint-js', 'js', 'modernizr', 'images', 'svg-sprite']);

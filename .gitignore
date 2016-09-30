@@ -9,6 +9,7 @@ main.min.css
 main.min.css.map
 scripts.min.js
 scripts.min.js.map
+modernizr-build.min.js
 
 ## Node.js
 lib-cov
