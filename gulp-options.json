@@ -11,6 +11,7 @@
     "dist": "dist",
     "css": "dist/assets/css",
     "img": "dist/assets/img",
-    "js": "dist/assets/js"
+    "js": "dist/assets/js",
+    "vendor": "dist/assets/js/vendor"
   }
 }
