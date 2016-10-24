@@ -107,7 +107,7 @@ gulp.task('sass', () => {
       errLogToConsole: true
     }))
     .pipe(autoprefixer({
-			browsers: ['last 2 versions'],
+			browsers: options.support.browser,
 			cascade: false
 		}))
     .pipe(header(banner, {
