@@ -7,11 +7,17 @@
     "js": "src/js/**/*.js",
     "vendor": "src/js/vendor/**/*.js"
   },
-  "dest" : {
+  "dest": {
     "dist": "dist",
     "css": "dist/assets/css",
     "img": "dist/assets/img",
     "js": "dist/assets/js",
     "vendor": "dist/assets/js/vendor"
+  },
+  "dep": {
+    "normalize": "node_modules/normalize-scss/sass"
+  },
+  "support": {
+    "browser": ["last 2 versions"]
   }
 }

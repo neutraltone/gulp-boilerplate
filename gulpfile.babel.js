@@ -14,6 +14,7 @@ import header from 'gulp-header';
 import imagemin from 'gulp-imagemin';
 import modernizr from 'gulp-modernizr';
 import path from 'path';
+import plumber from 'gulp-plumber';
 import pngquant from 'imagemin-pngquant';
 import rename from 'gulp-rename';
 import svgmin from 'gulp-svgmin';
@@ -96,13 +97,17 @@ gulp.task('serve', [
 
 gulp.task('sass', () => {
   return gulp.src(options.src.scss)
+    .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(sass({
+      includePaths: [
+        options.dep.normalize
+      ],
       outputStyle: 'compressed',
       errLogToConsole: true
     }))
     .pipe(autoprefixer({
-			browsers: ['last 2 versions'],
+			browsers: options.support.browser,
 			cascade: false
 		}))
     .pipe(header(banner, {
@@ -151,6 +156,7 @@ gulp.task('lint-sass', () => {
 
 gulp.task('js', () => {
   return gulp.src([options.src.vendor, options.src.js])
+    .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['es2015']

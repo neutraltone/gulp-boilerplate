@@ -33,47 +33,47 @@
 
   @else {
     border-style: solid;
-    height: 0;
     width: 0;
+    height: 0;
 
     @if $direction == "up" {
-      border-color: transparent transparent $color;
       border-width: 0 ($width / 2) $height;
+      border-color: transparent transparent $color;
     }
 
     @else if $direction == "up-right" {
-      border-color: transparent $color transparent transparent;
       border-width: 0 $width $width 0;
+      border-color: transparent $color transparent transparent;
     }
 
     @else if $direction == "right" {
-      border-color: transparent transparent transparent $color;
       border-width: ($height / 2) 0 ($height / 2) $width;
+      border-color: transparent transparent transparent $color;
     }
 
     @else if $direction == "down-right" {
-      border-color: transparent transparent $color;
       border-width: 0 0 $width $width;
+      border-color: transparent transparent $color;
     }
 
     @else if $direction == "down" {
-      border-color: $color transparent transparent;
       border-width: $height ($width / 2) 0;
+      border-color: $color transparent transparent;
     }
 
     @else if $direction == "down-left" {
-      border-color: transparent transparent transparent $color;
       border-width: $width 0 0 $width;
+      border-color: transparent transparent transparent $color;
     }
 
     @else if $direction == "left" {
-      border-color: transparent $color transparent transparent;
       border-width: ($height / 2) $width ($height / 2) 0;
+      border-color: transparent $color transparent transparent;
     }
 
     @else if $direction == "up-left" {
-      border-color: $color transparent transparent;
       border-width: $width $width 0 0;
+      border-color: $color transparent transparent;
     }
   }
 }
