@@ -100,6 +100,9 @@ gulp.task('sass', () => {
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(sass({
+      includePaths: [
+        options.dep.normalize
+      ],
       outputStyle: 'compressed',
       errLogToConsole: true
     }))
