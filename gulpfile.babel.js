@@ -5,25 +5,29 @@
  */
 
 import gulp from 'gulp';
+import autoprefixer from 'autoprefixer';
+import babel from 'gulp-babel';
+import BabiliPlugin from 'babili-webpack-plugin';
 import browserSync from 'browser-sync';
 import cheerio from 'gulp-cheerio';
 import concat from 'gulp-concat';
-import babel from 'gulp-babel';
 import eslint from 'gulp-eslint';
+import gulpStylelint from 'gulp-stylelint';
 import header from 'gulp-header';
 import imagemin from 'gulp-imagemin';
 import modernizr from 'gulp-modernizr';
 import path from 'path';
 import plumber from 'gulp-plumber';
 import pngquant from 'imagemin-pngquant';
+import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
+import sass from 'gulp-sass';
+import sourcemaps from 'gulp-sourcemaps';
 import svgmin from 'gulp-svgmin';
 import svgstore from 'gulp-svgstore';
 import uglify from 'gulp-uglify';
-import gulpStylelint from 'gulp-stylelint';
-import autoprefixer from 'gulp-autoprefixer';
-import sass from 'gulp-sass';
-import sourcemaps from 'gulp-sourcemaps';
+import webpack from 'webpack';
+import webpackStream from 'webpack-stream';
 
 
 /**
@@ -101,15 +105,18 @@ gulp.task('sass', () => {
     .pipe(sourcemaps.init())
     .pipe(sass({
       includePaths: [
-        options.dep.normalize
+        options.dep.normalize,
+        options.dep.avalancheCss
       ],
       outputStyle: 'compressed',
       errLogToConsole: true
     }))
-    .pipe(autoprefixer({
-			browsers: options.support.browser,
-			cascade: false
-		}))
+    .pipe(postcss([
+      autoprefixer({
+        browsers: options.support.browser,
+        cascade: false
+      })
+    ]))
     .pipe(header(banner, {
       pkg: pkg
     }))
@@ -146,35 +153,35 @@ gulp.task('lint-sass', () => {
 /*
  * JavaScript
  * ----------
- * - Concatinate plugins and scripts files
- * - Uglify concatinated code
- * - Inject banner into finished file
- * - Add .min suffix
+ * - Bundle JavaScript with Webpack
  * - Copy to destination
  * - Reload BrowserSync
  */
 
 gulp.task('js', () => {
-  return gulp.src([options.src.vendor, options.src.js])
-    .pipe(plumber())
-    .pipe(sourcemaps.init())
-    .pipe(babel({
-      presets: ['es2015']
-    }))
-    .pipe(concat('scripts.js'))
-    .pipe(uglify())
-    .pipe(header(banner, {
-      pkg: pkg
-    }))
-    .pipe(rename({
-      suffix: '.min'
-    }))
-    .pipe(sourcemaps.write('.'))
+  return gulp
+    .src(options.src.js)
+    .pipe(webpackStream({
+      devtool: 'source-map',
+      output: {
+        filename: 'app.min.js',
+      },
+      module: {
+        loaders: [{
+          loader: 'babel-loader',
+          test: /\.js$/,
+          exclude: /(node_modules|assets)\/(?![@contentdiscovered/ozpin|@contentdiscovered/flack])/,
+          query: {
+            presets: ['es2015'],
+          },
+        }],
+      },
+      plugins: [
+          new BabiliPlugin(),
+      ],
+    }, webpack))
     .pipe(gulp.dest(options.dest.js))
-    .pipe(browserSync.reload({
-      stream: true,
-      once: true
-    }))
+    .pipe(browserSync.stream());
 });
 
 

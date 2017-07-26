@@ -6,4 +6,9 @@
    Imports
    ========================================================================== */
 
-// @import '';
+// NPM dependencies
+@import 'normalize';
+@import "avalanche";
+
+// Initialize dependency functions
+@include normalize();

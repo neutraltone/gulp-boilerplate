@@ -15,7 +15,8 @@
     "vendor": "dist/assets/js/vendor"
   },
   "dep": {
-    "normalize": "node_modules/normalize-scss/sass"
+    "normalize": "node_modules/normalize-scss/sass",
+    "avalancheCss": "node_modules/avalanche-css"
   },
   "support": {
     "browser": ["last 2 versions"]
