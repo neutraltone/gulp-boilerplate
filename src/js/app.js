@@ -1,22 +1,18 @@
-// import polyfill from './modules/polyfills';
-// import { docReady, hasClass } from './modules/utilities';
+import polyfill from './modules/polyfills';
+import { docReady } from './modules/utilities';
 
 class App {
   constructor() {
-    polyfill();
-
-    console.info('Script initalised');
+    // polyfill();
 
     this.addEventListeners();
     this.addInitializers();
   }
 
   addEventListeners() {
-
   }
 
   addInitializers() {
-
   }
 }
 
