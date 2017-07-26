@@ -5,25 +5,26 @@
  */
 
 import gulp from 'gulp';
+import autoprefixer from 'autoprefixer';
+import babel from 'gulp-babel';
 import browserSync from 'browser-sync';
 import cheerio from 'gulp-cheerio';
 import concat from 'gulp-concat';
-import babel from 'gulp-babel';
 import eslint from 'gulp-eslint';
+import gulpStylelint from 'gulp-stylelint';
 import header from 'gulp-header';
 import imagemin from 'gulp-imagemin';
 import modernizr from 'gulp-modernizr';
 import path from 'path';
 import plumber from 'gulp-plumber';
 import pngquant from 'imagemin-pngquant';
+import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
+import sass from 'gulp-sass';
+import sourcemaps from 'gulp-sourcemaps';
 import svgmin from 'gulp-svgmin';
 import svgstore from 'gulp-svgstore';
 import uglify from 'gulp-uglify';
-import gulpStylelint from 'gulp-stylelint';
-import autoprefixer from 'gulp-autoprefixer';
-import sass from 'gulp-sass';
-import sourcemaps from 'gulp-sourcemaps';
 
 
 /**
@@ -106,10 +107,12 @@ gulp.task('sass', () => {
       outputStyle: 'compressed',
       errLogToConsole: true
     }))
-    .pipe(autoprefixer({
-			browsers: options.support.browser,
-			cascade: false
-		}))
+    .pipe(postcss([
+      autoprefixer({
+        browsers: options.support.browser,
+        cascade: false
+      })
+    ]))
     .pipe(header(banner, {
       pkg: pkg
     }))
