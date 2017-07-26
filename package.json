@@ -61,5 +61,7 @@
     "stylelint-config-standard": "^14.0.0",
     "stylelint-scss": "^1.3.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "avalanche-css": "^1.3.0"
+  }
 }

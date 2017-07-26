@@ -1,0 +1,48 @@
+/**
+ * settings/_grid.scss
+ */
+
+/* ==========================================================================
+   Avalanche override settings
+   ========================================================================== */
+
+/**
+ * Note: Settings below override and enable certain feature of the avalanche
+ * grid system. All documentation can be found here:
+ * https://github.com/colourgarden/avalanche
+ */
+
+// Defaults
+$av-gutter: $base-gutter;
+
+// Width denominator values
+$av-widths: (
+);
+
+// Breakpoints
+$av-breakpoints: (
+  "thumb":           "screen and (max-width: 499px)",
+  "handheld":        "screen and (min-width: 500px) and (max-width: 800px)",
+  "handheld-and-up": "screen and (min-width: 500px)",
+  "pocket":          "screen and (max-width: 800px)",
+  "lap":             "screen and (min-width: 801px) and (max-width: 1024px)",
+  "lap-and-up":      "screen and (min-width: 801px)",
+  "portable":        "screen and (max-width: 1024px)",
+  "desk":            "screen and (min-width: 1025px)",
+  "widescreen":      "screen and (min-width: ($base-container-width))",
+  "retina":          "screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx)"
+);
+
+// Features
+// $av-enable-grid-center: true;
+// $av-enable-grid-cell-center: true;
+// $av-enable-grid-right: true;
+// $av-enable-grid-middle: true;
+// $av-enable-grid-bottom: true;
+// $av-enable-grid-flush: true;
+// $av-enable-grid-tiny: true;
+// $av-enable-grid-small: true;
+// $av-enable-grid-large: true;
+// $av-enable-grid-huge: true;
+// $av-enable-grid-auto: true;
+// $av-enable-grid-rev: true;

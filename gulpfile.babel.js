@@ -102,7 +102,8 @@ gulp.task('sass', () => {
     .pipe(sourcemaps.init())
     .pipe(sass({
       includePaths: [
-        options.dep.normalize
+        options.dep.normalize,
+        options.dep.avalancheCss
       ],
       outputStyle: 'compressed',
       errLogToConsole: true
