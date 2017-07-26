@@ -8,11 +8,11 @@
  */
 
 export function docReady(callback) {
-    if (document.readyState !== 'loading') {
-        callback();
-    } else {
-        document.addEventListener('DOMContentLoaded', callback);
-    }
+  if (document.readyState !== 'loading') {
+    callback();
+  } else {
+    document.addEventListener('DOMContentLoaded', callback);
+  }
 }
 
 
@@ -23,10 +23,10 @@ export function docReady(callback) {
  */
 
 export function _(target, selector) {
-    if (typeof target === 'object') {
-        return target.querySelectorAll(selector);
-    }
-    return document.querySelectorAll(target);
+  if (typeof target === 'object') {
+    return target.querySelectorAll(selector);
+  }
+  return document.querySelectorAll(target);
 }
 
 
@@ -36,18 +36,18 @@ export function _(target, selector) {
  */
 
 export function toggleClass(el, className) {
-    if (el.classList) {
-        el.classList.toggle(className);
+  if (el.classList) {
+    el.classList.toggle(className);
+  } else {
+    const classes = el.className.split(' ');
+    const existingIndex = classes.indexOf(className);
+    if (existingIndex >= 0) {
+      classes.splice(existingIndex, 1);
     } else {
-        const classes = el.className.split(' ');
-        const existingIndex = classes.indexOf(className);
-        if (existingIndex >= 0) {
-            classes.splice(existingIndex, 1);
-        } else {
-            classes.push(className);
-        }
-        el.className = classes.join(' ');
+      classes.push(className);
     }
+    el.className = classes.join(' ');
+  }
 }
 
 
@@ -58,9 +58,9 @@ export function toggleClass(el, className) {
  */
 
 export function hasClass(el, selector) {
-    const className = ` ${selector} `;
-    if ((` ${el.className} `).replace(/[\n\t]/g, ' ').indexOf(className) > -1) {
-        return true;
-    }
-    return false;
+  const className = ` ${selector} `;
+  if ((` ${el.className} `).replace(/[\n\t]/g, ' ').indexOf(className) > -1) {
+    return true;
+  }
+  return false;
 }

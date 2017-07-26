@@ -3,26 +3,27 @@
  */
 
 function objectAssign() {
-    if (typeof Object.assign !== 'function') {
-      Object.assign = (target, varArgs) => {
-        if (target == null) {
-          throw new TypeError('Cannot convert undefined or null to object');
+  if (typeof Object.assign !== 'function') {
+    Object.assign = (target, varArgs) => {
+      if (target == null) {
+        throw new TypeError('Cannot convert undefined or null to object');
+      }
+
+      const to = Object(target);
+
+      for (let i = 1; i < arguments.length; i++) {
+        // eslint-disable-next-line prefer-rest-params
+        const nextSource = arguments[i];
+
+        if (nextSource != null) {
+          const keys = Object.keys(nextSource);
+          keys.forEach((nextKey) => {
+            if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+              to[nextKey] = nextSource[nextKey];
+            }
+          });
         }
-
-        const to = Object(target);
-
-        for (let i = 1; i < arguments.length; i++) {
-          const nextSource = arguments[i];
-
-          if (nextSource != null) {
-            const keys = Object.keys(nextSource);
-            keys.forEach((nextKey) => {
-              if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
-                to[nextKey] = nextSource[nextKey];
-              }
-            });
-          }
-        }
+      }
       return to;
     };
   }
