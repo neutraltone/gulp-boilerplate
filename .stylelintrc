@@ -1,7 +1,7 @@
 {
   "extends":[
     "stylelint-config-standard",
-    "stylelint-config-concentric"
+    "stylelint-config-concentric-order"
   ],
   "syntax": "scss",
   "plugins": [
